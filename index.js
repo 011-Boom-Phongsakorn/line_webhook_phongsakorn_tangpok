@@ -161,12 +161,19 @@ app.post("/webhook", (req, res) => {
     agent.add(`พื้นที่สามเหลี่ยม ฐาน ${base} ซม ความสูง ${height} ซม result: ${result}`)
   }
 
+  function calculateCircleArea(agent){
+    let radius = agent.parameters.radius;
+    let result = Math.PI * Math.pow(radius, 2);
+    agent.add(`รัศมีของวงกลมคือ ${radius} พื้นที่ของวงกลมคือ ${result.toFixed(2)}`)
+  }
+
   let intentMap = new Map();
   intentMap.set("Default Welcome Intent", welcome);
   intentMap.set("Default Fallback Intent", fallback);
   intentMap.set("BMI - custom - yes", bodyMassIndex);
   intentMap.set("area - rectangle - custom - yes", calculateRectangleArea);
   intentMap.set("area - triangle - custom - yes", calculateTriangleArea);
+  intentMap.set("area - circle - custom - yes", calculateCircleArea);
   agent.handleRequest(intentMap);
 });
 
