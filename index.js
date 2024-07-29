@@ -150,9 +150,8 @@ app.post("/webhook", (req, res) => {
     let width = agent.parameters.width;
     let length = agent.parameters.length;
     let result = width * length;
-    agent.add(
-      `พื้นที่สี่เหลี่ยม กว้าง ${width} ซม ความยาว ${length} ซม result ${result}`
-    );
+    // agent.add("พื้นที่สี่เหลี่ยม กว้าง ${width} ซม ความยาว ${length} ซม result ${result}");
+    agent.add(width, length, result);
   }
 
   let intentMap = new Map();
