@@ -154,11 +154,19 @@ app.post("/webhook", (req, res) => {
     // agent.add(width, length, result);
   }
 
+  function calculateTriangleArea(agent){
+    let base = agent.parameters.base;
+    let height = agent.parameters.height;
+    let result = 0.5 * (base * height);
+    agent.add(`พื้นที่สามเหลี่ยม ฐาน ${base} ซม ความสูง ${height} ซม result: ${result}`)
+  }
+
   let intentMap = new Map();
   intentMap.set("Default Welcome Intent", welcome);
   intentMap.set("Default Fallback Intent", fallback);
   intentMap.set("BMI - custom - yes", bodyMassIndex);
   intentMap.set("area - rectangle - custom - yes", calculateRectangleArea);
+  intentMap.set("area - triangle - custom - yes", calculateTriangleArea);
   agent.handleRequest(intentMap);
 });
 
