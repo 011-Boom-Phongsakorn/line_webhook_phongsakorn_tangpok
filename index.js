@@ -146,31 +146,45 @@ app.post("/webhook", (req, res) => {
     // agent.add(result);
   }
 
+  // 1. สร้างฟังก์ชั่นเพื่อคำนวณ
   function calculateRectangleArea(agent) {
     let width = agent.parameters.width;
     let length = agent.parameters.length;
     let result = width * length;
-    agent.add("พื้นที่สี่เหลี่ยม กว้าง" + width + "ซม ความยาว" + length + "ซม result" + result);
+    agent.add(
+      "พื้นที่สี่เหลี่ยม กว้าง" +
+        width +
+        "ซม ความยาว" +
+        length +
+        "ซม result" +
+        result
+    );
     // agent.add(width, length, result);
   }
 
-  function calculateTriangleArea(agent){
+  function calculateTriangleArea(agent) {
     let base = agent.parameters.base;
     let height = agent.parameters.height;
     let result = 0.5 * (base * height);
-    agent.add(`พื้นที่สามเหลี่ยม ฐาน ${base} ซม ความสูง ${height} ซม result: ${result}`)
+    agent.add(
+      `พื้นที่สามเหลี่ยม ฐาน ${base} ซม ความสูง ${height} ซม result: ${result}`
+    );
   }
 
-  function calculateCircleArea(agent){
+  function calculateCircleArea(agent) {
     let radius = agent.parameters.radius;
     let result = Math.PI * Math.pow(radius, 2);
-    agent.add(`รัศมีของวงกลมคือ ${radius} พื้นที่ของวงกลมคือ ${result.toFixed(2)}`)
+    agent.add(
+      `รัศมีของวงกลมคือ ${radius} พื้นที่ของวงกลมคือ ${result.toFixed(2)}`
+    );
   }
 
   let intentMap = new Map();
   intentMap.set("Default Welcome Intent", welcome);
   intentMap.set("Default Fallback Intent", fallback);
   intentMap.set("BMI - custom - yes", bodyMassIndex);
+
+  // 2. จับคู่ intent กัย function การทำงาน
   intentMap.set("area - rectangle - custom - yes", calculateRectangleArea);
   intentMap.set("area - triangle - custom - yes", calculateTriangleArea);
   intentMap.set("area - circle - custom - yes", calculateCircleArea);
